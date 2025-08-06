@@ -1,24 +1,25 @@
 package budget.ui;
 
-import budget.ui.MainWindow;
+import budget.data.TestDataProvider;
+import budget.data.UserRecord;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class MainWindowTest {
     private MainWindow mainWindow;
     private JButton refreshButton;
     private JTable userTable;
-    private List<String[]> testData;
+    private List<Object[]> testData;
+
 
     @BeforeEach
     void setUp() throws Exception {
@@ -31,7 +32,19 @@ public class MainWindowTest {
         });
         
         // Load test data
-        testData = loadTestData("test_data.txt");
+       testData = createTestData();
+    }
+
+    private List<Object[]> createTestData() {
+        List<Object[]> list = new ArrayList<Object[]>() {{
+            add(new Object[]{1,"john_doe",25});
+            add(new Object[]{2,"jane_smith",30});
+            add(new Object[]{3,"bob_wilson",45});
+            add(new Object[]{4,"alice_brown",28});
+            add(new Object[]{5,"charlie_davis",35});
+            add(new Object[]{6,"emma_white",31});
+        }};
+        return list;
     }
 
     @Test
@@ -45,16 +58,18 @@ public class MainWindowTest {
         // Verify table contents on EDT
         SwingUtilities.invokeAndWait(() -> {
             UserTableModel model = (UserTableModel) userTable.getModel();
+            model.getData(new TestDataProvider());
+
             assertEquals(6, model.getRowCount(), "Table should have 6 rows");
-            
+
             // Verify each row matches test data
             for (int i = 0; i < testData.size(); i++) {
-                String[] expectedRow = testData.get(i);
-                assertEquals(Integer.parseInt(expectedRow[0]), model.getValueAt(i, 0), 
+                Object[] expectedRow = testData.get(i);
+                assertEquals(expectedRow[0], model.getValueAt(i, 0),
                     "ID mismatch at row " + i);
                 assertEquals(expectedRow[1], model.getValueAt(i, 1), 
                     "Username mismatch at row " + i);
-                assertEquals(Integer.parseInt(expectedRow[2]), model.getValueAt(i, 2), 
+                assertEquals(expectedRow[2], model.getValueAt(i, 2),
                     "Age mismatch at row " + i);
             }
         });
@@ -93,14 +108,5 @@ public class MainWindowTest {
         return null;
     }
 
-    private List<String[]> loadTestData(String filename) throws IOException {
-        List<String[]> data = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                data.add(line.split(","));
-            }
-        }
-        return data;
-    }
+
 }
