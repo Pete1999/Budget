@@ -1,20 +1,19 @@
 package budget.ui;
 
 import budget.data.TestDataProvider;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.util.List;
+
+import static java.lang.Thread.sleep;
 
 public class MainWindowDemo {
     private MainWindow mainWindow;
     private JButton refreshButton;
     private JTable userTable;
-    private List<Object[]> testData;
 
     @BeforeEach
     void setUp() throws Exception {
@@ -41,9 +40,7 @@ public class MainWindowDemo {
     void demoRefreshButton() throws Exception {
 
             // (When the window is closed, the test will finish.)
-            while (mainWindow.isDisplayable()){
-                Thread.sleep(100);
-            }
+            while (mainWindow.isDisplayable()) sleep(100);
       }
 
     private JButton findButtonByText(Container container, String text) {
