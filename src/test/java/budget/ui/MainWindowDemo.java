@@ -39,9 +39,12 @@ public class MainWindowDemo {
     @Test
     void demoRefreshButton() throws Exception {
 
-        // Wait up to 60 seconds for demo
-
-        Thread.sleep(6000);
+            // The window is already shown and wired up in @BeforeEach.
+            // Just wait until the user closes all open windows.
+            while (JFrame.getFrames().length > 0 && JFrame.getFrames()[0].isDisplayable()) {
+                Thread.sleep(100);
+            }
+            // (When the window is closed, the test will finish.)
 
 
     }
