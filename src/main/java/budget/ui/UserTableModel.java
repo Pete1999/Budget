@@ -41,15 +41,6 @@ public class UserTableModel extends AbstractTableModel {
         data = dataProvider.getData();
     }
 
-//    UserTableModel(DataProvider provider){
-//        data = provider.getData();
-//    }
-
-//    public void addRow(Integer id, String username, Integer age) {
-//        data.add(new Object[]{id, username, age});
-//        fireTableRowsInserted(data.size() - 1, data.size() - 1);
-//    }
-
     public void clearData() {
         data.clear();
         fireTableDataChanged();
