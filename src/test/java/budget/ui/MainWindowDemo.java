@@ -1,6 +1,7 @@
 package budget.ui;
 
 import budget.data.TestDataProvider;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -39,15 +40,11 @@ public class MainWindowDemo {
     @Test
     void demoRefreshButton() throws Exception {
 
-            // The window is already shown and wired up in @BeforeEach.
-            // Just wait until the user closes all open windows.
-            while (JFrame.getFrames().length > 0 && JFrame.getFrames()[0].isDisplayable()) {
+            // (When the window is closed, the test will finish.)
+            while (mainWindow.isDisplayable()){
                 Thread.sleep(100);
             }
-            // (When the window is closed, the test will finish.)
-
-
-    }
+      }
 
     private JButton findButtonByText(Container container, String text) {
         for (Component comp : container.getComponents()) {
