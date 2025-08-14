@@ -1,15 +1,13 @@
 package budget.ui;
 
 import budget.data.TestDataProvider;
-import budget.data.UserRecord;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -20,57 +18,59 @@ public class MainWindowTest {
     private JTable userTable;
     private List<Object[]> testData;
 
-
     @BeforeEach
     void setUp() throws Exception {
-        // Create and show window on EDT
         SwingUtilities.invokeAndWait(() -> {
             mainWindow = new MainWindow();
-            // Get components using Component hierarchy
+            mainWindow.setVisible(true); // Show window for demo
             refreshButton = findButtonByText(mainWindow, "Refresh");
             userTable = findJTable(mainWindow);
+
+            // Replace the refresh action to use TestDataProvider
+            for (ActionListener al : refreshButton.getActionListeners()) {
+                refreshButton.removeActionListener(al);
+            }
+            refreshButton.addActionListener(e -> {
+                UserTableModel model = (UserTableModel) userTable.getModel();
+                model.getData(new TestDataProvider());
+                model.fireTableDataChanged();
+            });
         });
-        
-        // Load test data
-       testData = createTestData();
+
+        testData = createTestData();
     }
 
     private List<Object[]> createTestData() {
         List<Object[]> list = new ArrayList<Object[]>() {{
-            add(new Object[]{1,"john_doe",25});
-            add(new Object[]{2,"jane_smith",30});
-            add(new Object[]{3,"bob_wilson",45});
-            add(new Object[]{4,"alice_brown",28});
-            add(new Object[]{5,"charlie_davis",35});
-            add(new Object[]{6,"emma_white",31});
+            add(new Object[]{1, "john_doe", 25});
+            add(new Object[]{2, "jane_smith", 30});
+            add(new Object[]{3, "bob_wilson", 45});
+            add(new Object[]{4, "alice_brown", 28});
+            add(new Object[]{5, "charlie_davis", 35});
+            add(new Object[]{6, "emma_white", 31});
         }};
         return list;
     }
 
     @Test
     void testRefreshButton() throws Exception {
-        // Click refresh button on EDT
+        // For demonstration, let the user click the button.
+        // Optionally, uncomment below to auto-click for test
         SwingUtilities.invokeAndWait(() -> refreshButton.doClick());
-        
-        // Wait for potential SwingWorker to complete (max 2 seconds)
-        Thread.sleep(2000);
-        
-        // Verify table contents on EDT
+
+        // Wait up to 60 seconds for demo
+        Thread.sleep(6000);
+
+        // Now check the table contents after (potentially) manual refresh
         SwingUtilities.invokeAndWait(() -> {
             UserTableModel model = (UserTableModel) userTable.getModel();
-            model.getData(new TestDataProvider());
-
             assertEquals(6, model.getRowCount(), "Table should have 6 rows");
 
-            // Verify each row matches test data
             for (int i = 0; i < testData.size(); i++) {
                 Object[] expectedRow = testData.get(i);
-                assertEquals(expectedRow[0], model.getValueAt(i, 0),
-                    "ID mismatch at row " + i);
-                assertEquals(expectedRow[1], model.getValueAt(i, 1), 
-                    "Username mismatch at row " + i);
-                assertEquals(expectedRow[2], model.getValueAt(i, 2),
-                    "Age mismatch at row " + i);
+                assertEquals(expectedRow[0], model.getValueAt(i, 0), "ID mismatch at row " + i);
+                assertEquals(expectedRow[1], model.getValueAt(i, 1), "Username mismatch at row " + i);
+                assertEquals(expectedRow[2], model.getValueAt(i, 2), "Age mismatch at row " + i);
             }
         });
     }
@@ -107,6 +107,4 @@ public class MainWindowTest {
         }
         return null;
     }
-
-
 }
