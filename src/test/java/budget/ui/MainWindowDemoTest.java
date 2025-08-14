@@ -8,7 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-public class MainWindowDemo {
+public class MainWindowDemoTest {
     private MainWindow mainWindow;
     private JButton refreshButton;
     private JTable userTable;
@@ -35,7 +35,7 @@ public class MainWindowDemo {
 
             }
 
-    /**
+    /*
      * This exception (`java.io.IOException: An existing connection was forcibly closed by the remote host`) is **not** typical for pure Java Swing/JUnit tests that just open a window and wait for user input. It usually appears when there is some network communication involved (e.g., database, REST APIs, sockets). Since your test is focused on showing a Swing UI and using a local `TestDataProvider`, this error is unexpected.
      *
      * ### Possible Causes
@@ -104,6 +104,7 @@ public class MainWindowDemo {
         }
 
       }
+
 
     private JButton findButtonByText(Container container, String text) {
         for (Component comp : container.getComponents()) {
