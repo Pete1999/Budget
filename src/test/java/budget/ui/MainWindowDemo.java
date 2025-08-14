@@ -19,7 +19,7 @@ public class MainWindowDemo {
     void setUp() throws Exception {
         SwingUtilities.invokeAndWait(() -> {
             mainWindow = new MainWindow();
-            mainWindow.setVisible(true); // Show window for demo
+             // Show window for demo
             refreshButton = findButtonByText(mainWindow, "Refresh");
             userTable = findJTable(mainWindow);
 
@@ -39,8 +39,8 @@ public class MainWindowDemo {
     @Test
     void demoRefreshButton() throws Exception {
 
-            // (When the window is closed, the test will finish.)
-            while (mainWindow.isDisplayable()) sleep(100);
+        mainWindow.setVisible(true);
+        Thread.sleep(6000);
       }
 
     private JButton findButtonByText(Container container, String text) {
