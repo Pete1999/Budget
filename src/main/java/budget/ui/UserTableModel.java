@@ -9,6 +9,7 @@ import java.util.List;
 
 public class UserTableModel extends AbstractTableModel {
     private final String[] columnNames = {"ID", "Username", "Age"};
+    private final Class<?>[] columnClass = {int.class,String.class, Double.class};
     private List<UserRecord> data = new ArrayList<>();
 
     @Override
@@ -24,6 +25,11 @@ public class UserTableModel extends AbstractTableModel {
     @Override
     public String getColumnName(int col) {
         return columnNames[col];
+    }
+
+    @Override
+    public Class<?> getColumnClass(int columnIndex) {
+        return columnClass[columnIndex];
     }
 
     @Override
