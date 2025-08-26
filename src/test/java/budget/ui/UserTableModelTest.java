@@ -61,20 +61,13 @@ public class UserTableModelTest {
         assertEquals(Double.class,model.getColumnClass(2) );
     }
 
+    /**
+     * Tests getData
+    */
     @Test
     public void testGetValueAt() {
         model.getData(dataProvider);
-        assertEquals(1, model.getValueAt(0, 0));
-        assertEquals("user1", model.getValueAt(0, 1));
-        assertEquals(25, model.getValueAt(0, 2));
-        assertEquals(2, model.getValueAt(1, 0));
-        assertEquals("user2", model.getValueAt(1, 1));
-        assertEquals(30, model.getValueAt(1, 2));
-    }
 
-    @Test
-    public void testGetData() {
-        model.getData(dataProvider);
         for (int i = 0; i < testData.size(); i++) {
             Object[] expectedRow = testData.get(i);
             assertEquals(expectedRow[0], model.getValueAt(i, 0), "ID mismatch at row " + i);
@@ -82,6 +75,7 @@ public class UserTableModelTest {
             assertEquals(expectedRow[2], model.getValueAt(i, 2), "Age mismatch at row " + i);
         }
     }
+
 
     @Test
     public void testClearData() {
