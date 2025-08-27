@@ -4,7 +4,7 @@ import javax.sql.RowSet;
 import java.util.EnumSet;
 import java.util.Map;
 
-public class DataTableModelEnum<T extends Enum<T> & DDLEnum> {
+public class DataTableModelEnum<T extends Enum<T> & DDLEnum> implements IDataTableModelEnum<T> {
 
     private EnumSet<T> rowModel;
     private Map<Integer, Map<DDLEnum, Object>> tableData;
@@ -19,20 +19,24 @@ public class DataTableModelEnum<T extends Enum<T> & DDLEnum> {
 
     }
 
-    void setTableData(Class<T> clazz,RowSet rs) {
+    @Override
+    public void setTableData(Class<T> clazz, RowSet rs) {
         rowModel = EnumSet.allOf(clazz);
         this.tableData = DataTableModelFactoryEnum.loadSqlResultSet(rs,rowModel);
     }
 
-    int getNumColumns() {
+    @Override
+    public int getNumColumns() {
         return rowModel.size();
     }
 
-    int getNumRows() {
+    @Override
+    public int getNumRows() {
         return tableData.size();
     }
 
-    int getColIdx(String colName) {
+    @Override
+    public int getColIdx(String colName) {
 
         //find the enum for col header
         int i = 0;
@@ -47,13 +51,15 @@ public class DataTableModelEnum<T extends Enum<T> & DDLEnum> {
         return i;
     }
 
-    int getEnumColIndex(T ddl) {
+    @Override
+    public int getEnumColIndex(T ddl) {
         return ddl.ordinal();
     }
 
 
 
-    DDLEnum findColEnum(int colIndex) {
+    @Override
+    public DDLEnum findColEnum(int colIndex) {
         DDLEnum ddl = null;
         for (Enum<?> e :
                 rowModel) {
@@ -66,15 +72,18 @@ public class DataTableModelEnum<T extends Enum<T> & DDLEnum> {
         return ddl;
     }
 
-    void setData(Object aValue, int rowIndex, int colIndex) {
+    @Override
+    public void setData(Object aValue, int rowIndex, int colIndex) {
         tableData.get(rowIndex).put(findColEnum(colIndex), aValue);
     }
 
-    Object getData(int rowIndex, int colIndex) {
+    @Override
+    public Object getData(int rowIndex, int colIndex) {
         return tableData.get(rowIndex).get(findColEnum(colIndex));
     }
 
-    <U> void putData(int rowIndex,T ddl, U data) {
+    @Override
+    public <U> void putData(int rowIndex, T ddl, U data) {
         Class<?> ddlClass = ddl == null ? null : ddl.getClassType();
         if (ddlClass == null || (!(ddlClass.isInstance(data)))) throw new IllegalArgumentException();
 
@@ -82,7 +91,8 @@ public class DataTableModelEnum<T extends Enum<T> & DDLEnum> {
 
     }
 
-    <U> U getData(int rowData,T ddl, Class<U> uClass) {
+    @Override
+    public <U> U getData(int rowData, T ddl, Class<U> uClass) {
         if (ddl == null || uClass == null
                 || !(ddl.getClassType().isAssignableFrom(uClass))) {
             throw new IllegalArgumentException();

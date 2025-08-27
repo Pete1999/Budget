@@ -1,46 +1,57 @@
 package budget.ui;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.sql.RowSet;
 
-public class MockDataTableModelEnum implements DDLEnum {
-    private List<String> data;
+public class MockDataTableModelEnum implements IDataTableModelEnum<BudgetCategory> {
 
-    public MockDataTableModelEnum() {
-        this.data = new ArrayList<>();
+
+    @Override
+    public void setTableData(Class<BudgetCategory> clazz, RowSet rs) {
+
     }
 
-    public void setTableData(Class<?> clazz, List<String> data) {
-        this.data = data;
-    }
-
-    public int getNumRows() {
-        return data.size();
-    }
-
+    @Override
     public int getNumColumns() {
-        return 1; // Assuming one column for simplicity
-    }
-
-    public Object getData(int rowIndex, int columnIndex) {
-        return data.get(rowIndex);
-    }
-
-    public void setData(Object aValue, int rowIndex, int columnIndex) {
-        data.set(rowIndex, (String) aValue);
-    }
-
-    public DDLEnum findColEnum(int columnIndex) {
-        return this;
+        return 0;
     }
 
     @Override
-    public String getColName() {
-        return "Category";
+    public int getNumRows() {
+        return 0;
     }
 
     @Override
-    public Class<?> getClassType() {
-        return String.class;
+    public int getColIdx(String colName) {
+        return 0;
+    }
+
+    @Override
+    public int getEnumColIndex(BudgetCategory ddl) {
+        return 0;
+    }
+
+    @Override
+    public DDLEnum findColEnum(int colIndex) {
+        return null;
+    }
+
+    @Override
+    public void setData(Object aValue, int rowIndex, int colIndex) {
+
+    }
+
+    @Override
+    public Object getData(int rowIndex, int colIndex) {
+        return null;
+    }
+
+    @Override
+    public <U> void putData(int rowIndex, BudgetCategory ddl, U data) {
+
+    }
+
+    @Override
+    public <U> U getData(int rowData, BudgetCategory ddl, Class<U> uClass) {
+        return null;
     }
 }

@@ -1,28 +1,32 @@
 package budget.ui;
 
 
-import org.junit.jupiter.api.*;
-import java.util.ArrayList;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import javax.sql.rowset.CachedRowSet;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.mock;
 
 public class BudgetCategoryModelTest {
 
+    private final CachedRowSet testData = mock(CachedRowSet.class);
     private BudgetCategoryModel model;
     private MockDataTableModelEnum mockDtm;
+
 
     @BeforeEach
     public void setUp() {
         mockDtm = new MockDataTableModelEnum();
-        model = new BudgetCategoryModel();
+        model = new BudgetCategoryModel(mockDtm);
 //        model.dtmEnum = mockDtm; // Inject the mock implementation
     }
 
     @Test
     public void testListBudgetCategory() {
-        List<String> testData = List.of("Category1", "Category2", "Category3");
         mockDtm.setTableData(BudgetCategory.class, testData);
 
         List<String> result = model.listBudgetCategory();
@@ -41,7 +45,6 @@ public class BudgetCategoryModelTest {
 
     @Test
     public void testGetRowCount() {
-        List<String> testData = List.of("Category1", "Category2", "Category3");
         mockDtm.setTableData(BudgetCategory.class, testData);
 
         int result = model.getRowCount();
@@ -56,7 +59,6 @@ public class BudgetCategoryModelTest {
 
     @Test
     public void testGetValueAt() {
-        List<String> testData = List.of("Category1", "Category2", "Category3");
         mockDtm.setTableData(BudgetCategory.class, testData);
 
         Object result = model.getValueAt(1, 0);
@@ -65,7 +67,7 @@ public class BudgetCategoryModelTest {
 
     @Test
     public void testSetValueAt() {
-        List<String> testData = List.of("Category1", "Category2", "Category3");
+
         mockDtm.setTableData(BudgetCategory.class, testData);
 
         model.setValueAt("NewCategory", 1, 0);

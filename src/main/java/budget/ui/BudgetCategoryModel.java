@@ -5,21 +5,22 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.AbstractTableModel;
 import java.util.*;
 
-public class BudgetCategoryModel extends AbstractTableModel implements TableModelListener {
-    private final static DataTableModelEnum<BudgetCategory> dtmEnum = new DataTableModelEnum<>();
+public class BudgetCategoryModel extends AbstractTableModel implements TableModelListener  {
+    private final IDataTableModelEnum<BudgetCategory> dtmEnum;
     private final Set<BudgetCategory> editableColumns = EnumSet.allOf(BudgetCategory.class);
     private final Set<Integer> rowsChanged = new HashSet<>();
     private final List<DataRow<BudgetCategory>> inserts = new ArrayList<>();
 
-    BudgetCategoryModel() {
+    BudgetCategoryModel(IDataTableModelEnum<BudgetCategory> dtmEnum) {
         // TODO: 2023-05-10 set table data on creating an instance?
+        this.dtmEnum = dtmEnum;
         setTableData();
         this.addTableModelListener(this);
 
 
     }
 
-    static void setTableData() {
+    private void setTableData() {
         dtmEnum.setTableData(BudgetCategory.class,Db.getBudgetCategoryCategory());
     }
 

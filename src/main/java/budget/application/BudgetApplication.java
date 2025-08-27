@@ -1,7 +1,8 @@
 package budget.application;
 
 import budget.ui.MainWindow;
-import javax.swing.SwingUtilities;
+
+import javax.swing.*;
 
 public class BudgetApplication {
     public static void main(String[] args) {
