@@ -2,27 +2,41 @@ package budget.ui;
 
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+import javax.sql.RowSet;
 import javax.sql.rowset.CachedRowSet;
+import java.util.EnumSet;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.*;
 
 public class BudgetCategoryModelTest {
 
     private final CachedRowSet testData = mock(CachedRowSet.class);
     private BudgetCategoryModel model;
-    private MockDataTableModelEnum mockDtm;
+    private IDataTableModelEnum<BudgetCategory> mockDtm = new DataTableModelEnum();
 
 
     @BeforeEach
     public void setUp() {
-        mockDtm = new MockDataTableModelEnum();
+        DataTableModelFactoryEnum factoryEnum = mock(DataTableModelFactoryEnum.class);
+        RowSet rs = mock(RowSet.class);
+        EnumSet<BudgetCategory> rowModel = EnumSet.allOf(BudgetCategory.class);
+        when(factoryEnum.loadSqlResultSet(rs,rowModel)).thenReturn(fakeloadSqlResultSet());
+
         model = new BudgetCategoryModel(mockDtm);
-//        model.dtmEnum = mockDtm; // Inject the mock implementation
+
+    }
+
+    private Map<Integer, Map<DDLEnum, Object>> fakeloadSqlResultSet() {
+        Map<Integer, Map<DDLEnum, Object>> dataTable = new HashMap<>();
+        return dataTable;
     }
 
     @Test
@@ -37,7 +51,7 @@ public class BudgetCategoryModelTest {
     public void testSaveChanges() {
         // Implement this test
     }
-
+@Disabled("")
     @Test
     public void testAddRow() {
         // Implement this test
