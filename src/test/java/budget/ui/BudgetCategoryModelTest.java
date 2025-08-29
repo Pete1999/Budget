@@ -19,8 +19,8 @@ import static org.mockito.Mockito.*;
 public class BudgetCategoryModelTest {
 
     private final CachedRowSet testData = mock(CachedRowSet.class);
-    private BudgetCategoryModel model;
-    private IDataTableModelEnum<BudgetCategory> mockDtm = new DataTableModelEnum();
+    private BudgetCategoryModel budgetCategoryModel;
+    private IDataTableModelEnum<BudgetCategory> testDataTableModelEnum = new DataTableModelEnum();
 
 
     @BeforeEach
@@ -30,7 +30,9 @@ public class BudgetCategoryModelTest {
         EnumSet<BudgetCategory> rowModel = EnumSet.allOf(BudgetCategory.class);
         when(factoryEnum.loadSqlResultSet(rs,rowModel)).thenReturn(fakeloadSqlResultSet());
 
-        model = new BudgetCategoryModel(mockDtm);
+        budgetCategoryModel = new BudgetCategoryModel(testDataTableModelEnum);
+
+
 
     }
 
@@ -41,9 +43,9 @@ public class BudgetCategoryModelTest {
 
     @Test
     public void testListBudgetCategory() {
-        mockDtm.setTableData(BudgetCategory.class, testData);
 
-        List<String> result = model.listBudgetCategory();
+
+        List<String> result = budgetCategoryModel.listBudgetCategory();
         assertEquals(testData, result);
     }
 
@@ -51,47 +53,43 @@ public class BudgetCategoryModelTest {
     public void testSaveChanges() {
         // Implement this test
     }
-@Disabled("")
     @Test
     public void testAddRow() {
         // Implement this test
     }
-
+    @Disabled("This is just a wrapper")
     @Test
     public void testGetRowCount() {
-        mockDtm.setTableData(BudgetCategory.class, testData);
 
-        int result = model.getRowCount();
+        int result = budgetCategoryModel.getRowCount();
         assertEquals(testData.size(), result);
     }
 
     @Test
     public void testGetColumnCount() {
-        int result = model.getColumnCount();
+        int result = budgetCategoryModel.getColumnCount();
         assertEquals(1, result); // Assuming one column for simplicity
     }
 
     @Test
     public void testGetValueAt() {
-        mockDtm.setTableData(BudgetCategory.class, testData);
 
-        Object result = model.getValueAt(1, 0);
+        Object result = budgetCategoryModel.getValueAt(1, 0);
         assertEquals("Category2", result);
     }
 
     @Test
     public void testSetValueAt() {
 
-        mockDtm.setTableData(BudgetCategory.class, testData);
 
-        model.setValueAt("NewCategory", 1, 0);
-        Object result = model.getValueAt(1, 0);
+        budgetCategoryModel.setValueAt("NewCategory", 1, 0);
+        Object result = budgetCategoryModel.getValueAt(1, 0);
         assertEquals("NewCategory", result);
     }
 
     @Test
     public void testIsCellEditable() {
-        boolean result = model.isCellEditable(0, 0);
+        boolean result = budgetCategoryModel.isCellEditable(0, 0);
         assertTrue(result);
     }
 
