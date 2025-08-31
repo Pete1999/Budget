@@ -59,4 +59,5 @@ class DataTableModelFactoryEnum {
         return resultCol.equals(expectedCol);
     }
 
+
 }
