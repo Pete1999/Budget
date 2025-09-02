@@ -1,6 +1,7 @@
 package budget.ui;
 
 import javax.sql.RowSet;
+import javax.sql.rowset.CachedRowSet;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -10,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-class DataTableModelFactoryEnum {
+class DataTableModelFactoryEnum implements DbCalls {
 
     static Map<Integer, Map<DDLEnum, Object>> loadSqlResultSet(RowSet rs, Set<? extends DDLEnum> columns) {
         boolean checkDDL = compareDDL(rs,columns);
@@ -90,4 +91,13 @@ class DataTableModelFactoryEnum {
     }
 
 
+    @Override
+    public CachedRowSet getBudgetCategoryCategory() {
+        return Db.getBudgetCategoryCategory();
+    }
+
+    @Override
+    public String updateBudgetCategory(DataRow<BudgetCategory> updateRow) {
+        return Db.updateBudgetCategory(updateRow);
+    }
 }
