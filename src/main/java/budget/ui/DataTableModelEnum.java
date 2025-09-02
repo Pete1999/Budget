@@ -24,6 +24,11 @@ public class DataTableModelEnum<T extends Enum<T> & DDLEnum> implements IDataTab
         rowModel = EnumSet.allOf(clazz);
         this.tableData = DataTableModelFactoryEnum.loadSqlResultSet(rs,rowModel);
     }
+    @Override
+    public void setTableData(Class<T> clazz, String dataFile){
+        rowModel = EnumSet.allOf(clazz);
+        this.tableData = new DataTableModelFactoryEnum().loadDataFile(dataFile, rowModel);
+    }
 
     @Override
     public int getNumColumns() {

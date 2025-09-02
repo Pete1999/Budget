@@ -5,6 +5,8 @@ import javax.sql.RowSet;
 public interface IDataTableModelEnum<T extends Enum<T> & DDLEnum> {
     void setTableData(Class<T> clazz, RowSet rs);
 
+    void setTableData(Class<T> clazz, String dataFile);
+
     int getNumColumns();
 
     int getNumRows();

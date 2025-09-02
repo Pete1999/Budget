@@ -54,31 +54,6 @@ public class BudgetCategoryModelTest {
 
     }
 
-    private Map<Integer, Map<DDLEnum, Object>> fakeloadSqlResultSet() {
-        Map<Integer, Map<DDLEnum, Object>> dataTable = new HashMap<>();
-        try (BufferedReader reader = new BufferedReader(
-                new InputStreamReader(
-                        getClass().getClassLoader().getResourceAsStream("test_data_budget_category.txt")))) {
-            String line;
-            int rowIndex = 0;
-            while ((line = reader.readLine()) != null) {
-                Map<DDLEnum, Object> dataRow = new HashMap<>();
-                String[] parts = line.split(",");
-                dataRow.put(BudgetCategory.CATEGORY,parts[0]);
-                dataRow.put(BudgetCategory.DESC,parts[1]);
-                dataRow.put(BudgetCategory.TARGET,parts[2]);
-                dataRow.put(BudgetCategory.TYPE,parts[3]);
-
-                dataTable.put(rowIndex++,dataRow);
-            }
-
-
-        } catch (IOException e) {
-            e.printStackTrace();}
-
-        return dataTable;
-    }
-
     @Test
     public void testListBudgetCategory() {
         System.out.println(Mockito.class.getPackage().getImplementationVersion());
