@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-class DataTableModelFactoryEnum implements DbCalls {
+class DataTableModelFactoryEnum  {
 
     static Map<Integer, Map<DDLEnum, Object>> loadSqlResultSet(RowSet rs, Set<? extends DDLEnum> columns) {
         boolean checkDDL = compareDDL(rs,columns);
@@ -90,14 +90,4 @@ class DataTableModelFactoryEnum implements DbCalls {
         return dataTable;
     }
 
-
-    @Override
-    public CachedRowSet getBudgetCategoryCategory() {
-        return Db.getBudgetCategoryCategory();
-    }
-
-    @Override
-    public String updateBudgetCategory(DataRow<BudgetCategory> updateRow) {
-        return Db.updateBudgetCategory(updateRow);
-    }
 }

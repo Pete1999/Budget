@@ -11,6 +11,7 @@ public class BudgetCategoryModel extends AbstractTableModel implements TableMode
     private final Set<Integer> rowsChanged = new HashSet<>();
     private final List<DataRow<BudgetCategory>> inserts = new ArrayList<>();
 
+
     BudgetCategoryModel(IDataTableModelEnum<BudgetCategory> dtmEnum) {
         // TODO: 2023-05-10 set table data on creating an instance?
         this.dtmEnum = dtmEnum;
@@ -21,7 +22,7 @@ public class BudgetCategoryModel extends AbstractTableModel implements TableMode
     }
 
     private void setTableData() {
-        dtmEnum.setTableData(BudgetCategory.class,Db.getBudgetCategoryCategory());
+        dtmEnum.setTableData();
     }
 
     // TODO: 2022-03-31 Do this using the new DataTableModel, no Row class

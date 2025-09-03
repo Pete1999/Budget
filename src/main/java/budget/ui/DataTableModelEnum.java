@@ -1,6 +1,5 @@
 package budget.ui;
 
-import javax.sql.RowSet;
 import java.util.EnumSet;
 import java.util.Map;
 
@@ -8,26 +7,20 @@ public class DataTableModelEnum<T extends Enum<T> & DDLEnum> implements IDataTab
 
     private EnumSet<T> rowModel;
     private Map<Integer, Map<DDLEnum, Object>> tableData;
-
-    DataTableModelEnum(Class<T> ddl, RowSet rs) {
-
-        this.rowModel = EnumSet.allOf(ddl);
-        this.tableData = DataTableModelFactoryEnum.loadSqlResultSet(rs, rowModel);
-    }
+    private IGetTableData getTableData = new GetTableDataFromDb();
 
     public DataTableModelEnum() {
 
     }
-
     @Override
-    public void setTableData(Class<T> clazz, RowSet rs) {
-        rowModel = EnumSet.allOf(clazz);
-        this.tableData = DataTableModelFactoryEnum.loadSqlResultSet(rs,rowModel);
+    public void setTableData(){
+
+      this.tableData = getTableData.getData();
     }
     @Override
     public void setTableData(Class<T> clazz, String dataFile){
         rowModel = EnumSet.allOf(clazz);
-        this.tableData = new DataTableModelFactoryEnum().loadDataFile(dataFile, rowModel);
+//        this.tableData = new DataTableModelFactoryEnum().loadDataFile(dataFile, rowModel);
     }
 
     @Override
@@ -106,5 +99,6 @@ public class DataTableModelEnum<T extends Enum<T> & DDLEnum> implements IDataTab
         return uClass.cast(tableData.get(rowData).get(ddl));
 
     }
+
 
 }
