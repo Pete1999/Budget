@@ -64,11 +64,11 @@ class DataTableModelFactoryEnum  {
     }
 
 
-    Map<Integer, Map<DDLEnum, Object>> loadDataFile(String datafile, Set<? extends DDLEnum> columns) {
+    static Map<Integer, Map<DDLEnum, Object>> loadDataFile(String datafile, Set<? extends DDLEnum> columns) {
         Map<Integer, Map<DDLEnum, Object>> dataTable = new HashMap<>();
         try (BufferedReader reader = new BufferedReader(
                 new InputStreamReader(
-                        getClass().getClassLoader().getResourceAsStream(datafile)))) {
+                        DataTableModelFactoryEnum.class.getClassLoader().getResourceAsStream(datafile)))) {
             String line;
             int rowIndex = 0;
             while ((line = reader.readLine()) != null) {
