@@ -6,23 +6,25 @@ import javax.swing.table.AbstractTableModel;
 import java.util.*;
 
 public class BudgetCategoryModel extends AbstractTableModel implements TableModelListener  {
-    private final IDataTableModelEnum<BudgetCategory> dtmEnum;
+    private final IDataTableModelEnum<BudgetCategory> dtmEnum = new DataTableModelEnum<>();
+    private final IGetTableData gtd;
     private final Set<BudgetCategory> editableColumns = EnumSet.allOf(BudgetCategory.class);
     private final Set<Integer> rowsChanged = new HashSet<>();
     private final List<DataRow<BudgetCategory>> inserts = new ArrayList<>();
 
 
-    BudgetCategoryModel(IDataTableModelEnum<BudgetCategory> dtmEnum) {
+    BudgetCategoryModel(IDataTableModelEnum<BudgetCategory> dtmEnum, IGetTableData gtd) {
         // TODO: 2023-05-10 set table data on creating an instance?
-        this.dtmEnum = dtmEnum;
-        setTableData();
+
+        this.gtd = gtd;
+        setTableData(this.gtd);
         this.addTableModelListener(this);
 
 
     }
 
-    private void setTableData() {
-        dtmEnum.setTableData();
+    private void setTableData(IGetTableData getTableData) {
+        dtmEnum.setTableData(getTableData);
     }
 
     // TODO: 2022-03-31 Do this using the new DataTableModel, no Row class
@@ -30,7 +32,7 @@ public class BudgetCategoryModel extends AbstractTableModel implements TableMode
 
         ArrayList<String> categoryName = new ArrayList<>();
         for (int i = 0; i < dtmEnum.getNumRows(); i++) {
-            String category = dtmEnum.getData(i,BudgetCategory.CATEGORY,String.class);
+            String category = dtmEnum.getData(i,BudgetCategory.CATEGORY, String.class);
             categoryName.add(category);
         }
 

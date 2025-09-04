@@ -13,8 +13,7 @@ public class DataTableModelEnum<T extends Enum<T> & DDLEnum> implements IDataTab
 
     }
     @Override
-    public void setTableData(){
-
+    public void setTableData(IGetTableData getTableData){
       this.tableData = getTableData.getData();
     }
     @Override

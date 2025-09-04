@@ -31,6 +31,7 @@ public class BudgetCategoryModelTest {
     @BeforeEach
     public void setUp() {
         DataTableModelEnum<BudgetCategory> testDataTableModelEnum = new DataTableModelEnum<>();
+        GetTableDataFromFile gtd = new GetTableDataFromFile();
 //        try(
 //        MockedStatic<DataTableModelFactoryEnum> dataSource = mockStatic(DataTableModelFactoryEnum.class);
 //        MockedStatic<Db> db = mockStatic(Db.class)){
@@ -46,7 +47,7 @@ public class BudgetCategoryModelTest {
 ////        doNothing().when(testDataTableModelEnum).setTableData(any(BudgetCategory.class).getDeclaringClass(),any());
 
 
-        budgetCategoryModel = new BudgetCategoryModel(testDataTableModelEnum);
+        budgetCategoryModel = new BudgetCategoryModel(testDataTableModelEnum,gtd);
 
 
 
