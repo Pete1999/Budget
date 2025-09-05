@@ -1,10 +1,6 @@
 package budget.ui;
 
 import javax.sql.RowSet;
-import javax.sql.rowset.CachedRowSet;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -63,31 +59,5 @@ class DataTableModelFactoryEnum  {
         return resultCol.equals(expectedCol);
     }
 
-
-    static Map<Integer, Map<DDLEnum, Object>> loadDataFile(String datafile, Set<? extends DDLEnum> columns) {
-        Map<Integer, Map<DDLEnum, Object>> dataTable = new HashMap<>();
-        try (BufferedReader reader = new BufferedReader(
-                new InputStreamReader(
-                        DataTableModelFactoryEnum.class.getClassLoader().getResourceAsStream(datafile)))) {
-            String line;
-            int rowIndex = 0;
-            while ((line = reader.readLine()) != null) {
-                Map<DDLEnum, Object> dataRow = new HashMap<>();
-                String[] parts = line.split(",");
-                int col = 0;
-                for (DDLEnum e : columns){
-
-                    dataRow.put(e, parts[col++]);
-                }
-
-                dataTable.put(rowIndex++,dataRow);
-            }
-
-
-        } catch (IOException e) {
-            e.printStackTrace();}
-
-        return dataTable;
-    }
 
 }
