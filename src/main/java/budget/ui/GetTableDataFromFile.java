@@ -24,9 +24,13 @@ public class GetTableDataFromFile implements IGetTableData {
                 String[] parts = line.split(",");
                 int col = 0;
                 for (DDLEnum e : columns){
-
+                    if (e.getClassType()   == Integer.class) {
+                        dataRow.put(e,Integer.valueOf(parts[col++]));
+                    }else{
                     dataRow.put(e, parts[col++]);
-                }
+                    }
+
+                     }
 
                 dataTable.put(rowIndex++,dataRow);
             }
