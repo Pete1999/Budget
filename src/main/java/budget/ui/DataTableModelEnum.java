@@ -7,7 +7,6 @@ public class DataTableModelEnum<T extends Enum<T> & DDLEnum> implements IDataTab
 
     private EnumSet<T> rowModel;
     private Map<Integer, Map<DDLEnum, Object>> tableData;
-    private IGetTableData getTableData = new GetTableDataFromDb();
 
     public DataTableModelEnum() {
 

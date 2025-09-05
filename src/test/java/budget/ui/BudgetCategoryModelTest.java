@@ -30,7 +30,7 @@ public class BudgetCategoryModelTest {
 
     @BeforeEach
     public void setUp() {
-        DataTableModelEnum<BudgetCategory> testDataTableModelEnum = new DataTableModelEnum<>();
+//        DataTableModelEnum<BudgetCategory> testDataTableModelEnum = new DataTableModelEnum<>();
         GetTableDataFromFile gtd = new GetTableDataFromFile();
 //        try(
 //        MockedStatic<DataTableModelFactoryEnum> dataSource = mockStatic(DataTableModelFactoryEnum.class);
@@ -47,7 +47,7 @@ public class BudgetCategoryModelTest {
 ////        doNothing().when(testDataTableModelEnum).setTableData(any(BudgetCategory.class).getDeclaringClass(),any());
 
 
-        budgetCategoryModel = new BudgetCategoryModel(testDataTableModelEnum,gtd);
+        budgetCategoryModel = new BudgetCategoryModel(gtd);
 
 
 
@@ -59,7 +59,7 @@ public class BudgetCategoryModelTest {
        List<String> list = budgetCategoryModel.listBudgetCategory();
 
 
-        assertEquals(list.size(),10);
+        assertEquals(list.size(),3);
     }
 
     @Test

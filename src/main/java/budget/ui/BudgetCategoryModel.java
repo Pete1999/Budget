@@ -13,7 +13,7 @@ public class BudgetCategoryModel extends AbstractTableModel implements TableMode
     private final List<DataRow<BudgetCategory>> inserts = new ArrayList<>();
 
 
-    BudgetCategoryModel(IDataTableModelEnum<BudgetCategory> dtmEnum, IGetTableData gtd) {
+    BudgetCategoryModel( IGetTableData gtd) {
         // TODO: 2023-05-10 set table data on creating an instance?
 
         this.gtd = gtd;
