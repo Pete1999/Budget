@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class MainWindow extends JFrame {
-    private final JTable userTable;
+    private final JTable budgetTable;
     private final UserTableModel tableModel;
     private final JButton refreshButton;
     private final JButton insertButton;
@@ -18,7 +18,7 @@ public class MainWindow extends JFrame {
 
         // Create components
         tableModel = new UserTableModel();
-        userTable = new JTable(tableModel);
+        budgetTable = new JTable(tableModel);
         refreshButton = new JButton("Refresh");
         insertButton = new JButton("Insert New User");
         statusBar = new JLabel(" ");
@@ -31,7 +31,7 @@ public class MainWindow extends JFrame {
         // Main layout
         setLayout(new BorderLayout());
         add(toolBar, BorderLayout.NORTH);
-        add(new JScrollPane(userTable), BorderLayout.CENTER);
+        add(new JScrollPane(budgetTable), BorderLayout.CENTER);
         add(statusBar, BorderLayout.SOUTH);
 
         // Add listeners

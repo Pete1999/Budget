@@ -1,5 +1,7 @@
 package budget.ui;
 
+import budget.application.BudgetCategory;
+
 import javax.sql.rowset.CachedRowSet;
 
 public class BudgetDb implements BudgetDbCalls{
