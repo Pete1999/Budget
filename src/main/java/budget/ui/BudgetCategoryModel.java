@@ -24,7 +24,7 @@ public class BudgetCategoryModel extends AbstractTableModel implements TableMode
     }
 
     private void setTableData(IGetTableData getTableData) {
-        dtmEnum.setTableData(getTableData);
+        dtmEnum.setTableData(BudgetCategory.class, getTableData);
     }
 
     // TODO: 2022-03-31 Do this using the new DataTableModel, no Row class

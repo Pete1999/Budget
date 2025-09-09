@@ -27,8 +27,7 @@ public class MainWindowDemoTest {
                 refreshButton.removeActionListener(al);
             }
             refreshButton.addActionListener(e -> {
-                UserTableModel model = (UserTableModel) userTable.getModel();
-                model.getData(new TestDataProvider());
+                BudgetCategoryModel model = (BudgetCategoryModel) userTable.getModel();
                 model.fireTableDataChanged();
             });
         });

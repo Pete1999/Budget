@@ -1,7 +1,7 @@
 package budget.ui;
 
 public interface IDataTableModelEnum<T extends Enum<T> & DDLEnum> {
-    void setTableData(IGetTableData gtd);
+    void setTableData(Class<T> clazz, IGetTableData gtd);
 
     void setTableData(Class<T> clazz, String dataFile);
 

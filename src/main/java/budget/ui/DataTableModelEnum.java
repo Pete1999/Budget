@@ -12,8 +12,9 @@ public class DataTableModelEnum<T extends Enum<T> & DDLEnum> implements IDataTab
 
     }
     @Override
-    public void setTableData(IGetTableData getTableData){
-      this.tableData = getTableData.getData();
+    public void setTableData(Class<T> clazz, IGetTableData getTableData){
+        rowModel = EnumSet.allOf(clazz);
+        this.tableData = getTableData.getData();
     }
     @Override
     public void setTableData(Class<T> clazz, String dataFile){

@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class MainWindow extends JFrame {
     private final JTable userTable;
-    private final UserTableModel tableModel;
+    private final BudgetCategoryModel tableModel;
     private final JButton refreshButton;
     private final JButton insertButton;
     private final JLabel statusBar;
@@ -17,7 +17,8 @@ public class MainWindow extends JFrame {
         setLocationRelativeTo(null);
 
         // Create components
-        tableModel = new UserTableModel();
+
+        tableModel = new BudgetCategoryModel(new GetTableDataFromFile());
         userTable = new JTable(tableModel);
         refreshButton = new JButton("Refresh");
         insertButton = new JButton("Insert New User");
