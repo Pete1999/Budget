@@ -1,11 +1,12 @@
 package budget.ui;
 
 import javax.swing.*;
+import javax.swing.table.AbstractTableModel;
 import java.awt.*;
 
 public class MainWindow extends JFrame {
     private final JTable userTable;
-    private final BudgetCategoryModel tableModel;
+    private final AbstractTableModel tableModel;
     private final JButton refreshButton;
     private final JButton insertButton;
     private final JLabel statusBar;
