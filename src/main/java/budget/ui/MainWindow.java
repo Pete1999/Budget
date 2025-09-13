@@ -13,10 +13,10 @@ public class MainWindow extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 600);
         setLocationRelativeTo(null);
-        BudgetCategoryData budgetCategoryData = new BudgetCategoryData();
+
         // Create components
 
-        TableModel tableModel = budgetCategoryData.getTableModel();
+        BudgetCategoryData tableModel = BudgetCategoryData.getInstance();
         JTable userTable = new JTable(tableModel);
         JButton refreshButton = new JButton("Refresh");
         JButton insertButton = new JButton("Insert New User");

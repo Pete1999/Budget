@@ -11,7 +11,7 @@ class BudgetCategoryDataTest {
 
     @BeforeEach
     void setUp() {
-        subject = new BudgetCategoryData();
+        subject = BudgetCategoryData.getInstance();
     }
 
     @Test
