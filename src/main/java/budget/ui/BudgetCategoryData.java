@@ -9,22 +9,21 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 class BudgetCategoryData {
-    TableModel getTableModel(){
+    private final String[] columnNames = {"category", "category_type", "description", "target"};
 
-        ArrayList<ArrayList<Object>> listData =  getDataFromFile();
+    TableModel getTableModel() {
+
+        ArrayList<ArrayList<Object>> listData = getDataFromFile();
         Object[][] data = new Object[listData.size()][];
         for (int i = 0; i < listData.size(); i++) {
             Object[] row = listData.get(i).toArray();
             data[i] = row;
         }
 
-        return new DefaultTableModel(data,columnNames);
+        return new DefaultTableModel(data, columnNames);
     }
 
-    String[] columnNames = {"category","category_type","description","target"};
-
-
-    ArrayList<ArrayList<Object>> getDataFromFile(){
+    private ArrayList<ArrayList<Object>> getDataFromFile() {
 
         ArrayList<ArrayList<Object>> table = new ArrayList<>();
 
@@ -34,10 +33,10 @@ class BudgetCategoryData {
 
                 )
         )
-                ){
+        ) {
             String line;
 
-            while((line = reader.readLine()) != null) {
+            while ((line = reader.readLine()) != null) {
                 Object[] parts = line.split(",");
                 ArrayList<Object> row = new ArrayList<>(Arrays.asList(parts));
                 table.add(row);

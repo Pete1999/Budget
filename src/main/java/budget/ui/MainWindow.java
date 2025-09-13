@@ -1,18 +1,11 @@
 package budget.ui;
 
 
-
-
-
 import javax.swing.*;
 import javax.swing.table.TableModel;
 import java.awt.*;
 
 public class MainWindow extends JFrame {
-    private final JTable userTable;
-    private final TableModel tableModel;
-    private final JButton refreshButton;
-    private final JButton insertButton;
     private final JLabel statusBar;
 
     public MainWindow() {
@@ -23,10 +16,10 @@ public class MainWindow extends JFrame {
         BudgetCategoryData budgetCategoryData = new BudgetCategoryData();
         // Create components
 
-        tableModel = budgetCategoryData.getTableModel();
-        userTable = new JTable(tableModel);
-        refreshButton = new JButton("Refresh");
-        insertButton = new JButton("Insert New User");
+        TableModel tableModel = budgetCategoryData.getTableModel();
+        JTable userTable = new JTable(tableModel);
+        JButton refreshButton = new JButton("Refresh");
+        JButton insertButton = new JButton("Insert New User");
         statusBar = new JLabel(" ");
 
         // Layout
