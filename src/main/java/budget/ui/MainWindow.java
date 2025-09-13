@@ -24,7 +24,7 @@ public class MainWindow extends JFrame {
         BudgetCategoryData budgetCategoryData = new BudgetCategoryData();
         // Create components
 
-        tableModel = new DefaultTableModel(budgetCategoryData.data,budgetCategoryData.columnNames);
+        tableModel = budgetCategoryData.getTableModel();
         userTable = new JTable(tableModel);
         refreshButton = new JButton("Refresh");
         insertButton = new JButton("Insert New User");

@@ -15,7 +15,8 @@ class BudgetCategoryData {
         ArrayList<ArrayList<Object>> listData =  getDataFromFile("test_data_budget_category.txt");
         Object[][] data = new Object[listData.size()][];
         for (int i = 0; i < listData.size(); i++) {
-            data[i] = listData.get(i).toArray();
+            Object[] row = listData.get(i).toArray();
+            data[i] = row;
         }
 
         return new DefaultTableModel(data,columnNames);
@@ -39,6 +40,7 @@ class BudgetCategoryData {
     ArrayList<ArrayList<Object>> getDataFromFile(String datafile){
 
         ArrayList<ArrayList<Object>> table = new ArrayList<>();
+        ArrayList<ArrayList<Object>> table2d = new ArrayList<>();
 
 
         try (BufferedReader reader = new BufferedReader(
@@ -49,11 +51,12 @@ class BudgetCategoryData {
                 ){
             String line;
             int rows = 0;
+
             while((line = reader.readLine()) != null) {
-                Object[] parts = line.split("'");
+                Object[] parts = line.split(",");
                 ArrayList<Object> row = new ArrayList<>(Arrays.asList(parts));
                 table.add(row);
-
+                table2d.add(rows,row);
             }
 
         } catch (IOException e) {
