@@ -1,15 +1,25 @@
 package budget.ui;
 
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
-
-import static java.util.Arrays.asList;
+import java.util.Vector;
 
 class BudgetCategoryData {
+    TableModel getTableModel(){
 
+        ArrayList<ArrayList<Object>> listData =  getDataFromFile("test_data_budget_category.txt");
+        Object[][] data = new Object[listData.size()][];
+        for (int i = 0; i < listData.size(); i++) {
+            data[i] = listData.get(i).toArray();
+        }
+
+        return new DefaultTableModel(data,columnNames);
+    }
      Object[][] data = {
             {"Kathy", "Smith",
                     "Snowboarding", new Integer(5), new Boolean(false)},
@@ -30,6 +40,7 @@ class BudgetCategoryData {
 
         ArrayList<ArrayList<Object>> table = new ArrayList<>();
 
+
         try (BufferedReader reader = new BufferedReader(
                 new InputStreamReader(getClass().getClassLoader().getResourceAsStream(datafile)
 
@@ -41,7 +52,8 @@ class BudgetCategoryData {
             while((line = reader.readLine()) != null) {
                 Object[] parts = line.split("'");
                 ArrayList<Object> row = new ArrayList<>(Arrays.asList(parts));
-                table.add(rows++,row);
+                table.add(row);
+
             }
 
         } catch (IOException e) {
