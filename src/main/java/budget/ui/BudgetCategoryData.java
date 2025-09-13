@@ -1,0 +1,53 @@
+package budget.ui;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import static java.util.Arrays.asList;
+
+class BudgetCategoryData {
+
+     Object[][] data = {
+            {"Kathy", "Smith",
+                    "Snowboarding", new Integer(5), new Boolean(false)},
+            {"John", "Doe",
+                    "Rowing", new Integer(3), new Boolean(true)},
+            {"Sue", "Black",
+                    "Knitting", new Integer(2), new Boolean(false)},
+            {"Jane", "White",
+                    "Speed reading", new Integer(20), new Boolean(true)},
+            {"Joe", "Brown",
+                    "Pool", new Integer(10), new Boolean(false)}
+    };
+
+    String[] columnNames = {"category","category_type","description","target"};
+
+
+    ArrayList<ArrayList<Object>> getDataFromFile(String datafile){
+
+        ArrayList<ArrayList<Object>> table = new ArrayList<>();
+
+        try (BufferedReader reader = new BufferedReader(
+                new InputStreamReader(getClass().getClassLoader().getResourceAsStream(datafile)
+
+                )
+        )
+                ){
+            String line;
+            int rows = 0;
+            while((line = reader.readLine()) != null) {
+                Object[] parts = line.split("'");
+                ArrayList<Object> row = new ArrayList<>(Arrays.asList(parts));
+                table.add(rows++,row);
+            }
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        return table;
+    }
+}
