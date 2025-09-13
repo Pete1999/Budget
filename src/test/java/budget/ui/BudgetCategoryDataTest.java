@@ -16,7 +16,7 @@ class BudgetCategoryDataTest {
 
     @Test
     void testReadFileData() {
-      ArrayList<ArrayList<Object>> data =  subject.getDataFromFile("test_data_budget_category.txt");
+      ArrayList<ArrayList<Object>> data =  subject.getDataFromFile();
         System.out.println(data);
     }
 
