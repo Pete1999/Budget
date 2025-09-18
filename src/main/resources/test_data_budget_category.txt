@@ -1,0 +1,3 @@
+FOOD,MANDATORY,The food we eat,3400
+UTILS,MANDATORY,Heat Hydro,578
+TRIP,DISCRETIONARY,planned vacations,6890
