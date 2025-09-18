@@ -7,17 +7,17 @@ import javax.swing.table.TableModel;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class BudgetCategoryDataTest {
-    BudgetCategoryData subject;
+class BudgetCategoryTableModelTest {
+    BudgetCategoryTableModel subject;
 
     @BeforeEach
     void setUp() {
-        subject = BudgetCategoryData.getInstance();
+        subject = BudgetCategoryTableModel.getInstance();
     }
 
     @Test
     void testGetTableModel() {
-        TableModel tm = BudgetCategoryData.getTableModel();
+        TableModel tm = BudgetCategoryTableModel.getTableModel();
         assertInstanceOf(TableModel.class, tm);
 
     }

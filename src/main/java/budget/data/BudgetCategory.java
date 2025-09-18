@@ -1,6 +1,8 @@
-package budget.ui;
+package budget.data;
 
-public enum BudgetCategory implements DDLEnum{
+import budget.ui.DDLEnum;
+
+public enum BudgetCategory implements DDLEnum {
     CATEGORY("category", String.class),
     TYPE("category_type",String.class),
     DESC("description",String.class),

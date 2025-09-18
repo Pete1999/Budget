@@ -1,5 +1,7 @@
 package budget.ui;
 
+import budget.data.BudgetCategory;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;

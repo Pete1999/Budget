@@ -1,19 +1,18 @@
 package budget.ui;
 
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-class BudgetCategoryData extends DefaultTableModel {
+class BudgetCategoryTableModel extends DefaultTableModel {
     public static final String FILE_NAME = "test_data_budget_category.txt";
     private static final String[] columnNames = {"category", "category_type", "description", "target"};
-    private static BudgetCategoryData instance;
-    private BudgetCategoryData(){};
-    private BudgetCategoryData(Object[][] data,Object[] col) {
+    private static BudgetCategoryTableModel instance;
+    private BudgetCategoryTableModel(){};
+    private BudgetCategoryTableModel(Object[][] data, Object[] col) {
         super(data,col);
     }
 
@@ -23,13 +22,13 @@ class BudgetCategoryData extends DefaultTableModel {
         return obj.getClass();
     }
 
-    static BudgetCategoryData getInstance(){
+    static BudgetCategoryTableModel getInstance(){
         if (instance == null){
-            instance = BudgetCategoryData.getTableModel();
+            instance = BudgetCategoryTableModel.getTableModel();
         }
         return instance;
     }
-    static BudgetCategoryData getTableModel() {
+    static BudgetCategoryTableModel getTableModel() {
 
         ArrayList<ArrayList<Object>> listData = getDataFromFile();
         Object[][] data = new Object[listData.size()][];
@@ -38,7 +37,7 @@ class BudgetCategoryData extends DefaultTableModel {
             data[i] = row;
         }
 
-        return new BudgetCategoryData(data, columnNames);
+        return new BudgetCategoryTableModel(data, columnNames);
     }
 
     private static ArrayList<ArrayList<Object>> getDataFromFile() {
@@ -47,7 +46,7 @@ class BudgetCategoryData extends DefaultTableModel {
 
 
         try (BufferedReader reader = new BufferedReader(
-                new InputStreamReader(BudgetCategoryData.class.getClassLoader().getResourceAsStream(FILE_NAME)
+                new InputStreamReader(BudgetCategoryTableModel.class.getClassLoader().getResourceAsStream(FILE_NAME)
 
                 )
         )

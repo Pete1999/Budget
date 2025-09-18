@@ -1,5 +1,7 @@
 package budget.ui;
 
+import budget.data.BudgetCategory;
+
 import javax.sql.RowSet;
 import java.util.EnumSet;
 import java.util.Map;
