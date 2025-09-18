@@ -1,6 +1,8 @@
 package budget.ui;
 
-import budget.data.BudgetCategory;
+import budget.data.GetTableDataFromFile;
+import budget.model.BudgetCategory;
+import budget.model.DDLEnum;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

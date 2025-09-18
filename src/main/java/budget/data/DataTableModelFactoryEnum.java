@@ -1,4 +1,6 @@
-package budget.ui;
+package budget.data;
+
+import budget.model.DDLEnum;
 
 import javax.sql.RowSet;
 import java.sql.ResultSetMetaData;

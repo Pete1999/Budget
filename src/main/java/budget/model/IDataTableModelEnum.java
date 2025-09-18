@@ -1,4 +1,6 @@
-package budget.ui;
+package budget.model;
+
+import budget.data.IGetTableData;
 
 public interface IDataTableModelEnum<T extends Enum<T> & DDLEnum> {
     void setTableData(Class<T> clazz, IGetTableData gtd);

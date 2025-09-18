@@ -1,4 +1,4 @@
-package budget.ui;
+package budget.model;
 
 public interface DDLEnum{
     String  getColName();

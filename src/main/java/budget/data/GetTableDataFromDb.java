@@ -1,6 +1,7 @@
-package budget.ui;
+package budget.data;
 
-import budget.data.BudgetCategory;
+import budget.model.BudgetCategory;
+import budget.model.DDLEnum;
 
 import javax.sql.RowSet;
 import java.util.EnumSet;

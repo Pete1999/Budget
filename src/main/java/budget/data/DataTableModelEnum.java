@@ -1,4 +1,7 @@
-package budget.ui;
+package budget.data;
+
+import budget.model.DDLEnum;
+import budget.model.IDataTableModelEnum;
 
 import java.util.EnumSet;
 import java.util.Map;

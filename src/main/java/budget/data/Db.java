@@ -1,6 +1,7 @@
-package budget.ui;
+package budget.data;
 
-import budget.data.BudgetCategory;
+import budget.data.DataRow;
+import budget.model.BudgetCategory;
 
 import javax.sql.rowset.CachedRowSet;
 import javax.sql.rowset.RowSetFactory;
